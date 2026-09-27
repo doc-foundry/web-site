@@ -1,0 +1,11 @@
+// Cloudflare Workers config: serve the Docusaurus build (site/build) as a static site.
+{
+  "name": "doc-foundry",
+  "compatibility_date": "2026-09-27",
+  // Required (even empty) for per-branch/PR previews via `wrangler preview`.
+  "previews": {},
+  "assets": {
+    "directory": "./site/build",
+    "not_found_handling": "404-page"
+  }
+}

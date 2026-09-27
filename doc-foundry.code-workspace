@@ -1,0 +1,52 @@
+{
+  "folders": [
+    { "name": "web-site (root)", "path": "." },
+    { "name": "site", "path": "site" },
+    { "name": "downloads", "path": "downloads" }
+  ],
+  "settings": {
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.docusaurus": true,
+      "**/build": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.docusaurus": true,
+      "**/build": true
+    },
+    "[markdown]": { "editor.wordWrap": "on" },
+    "[mdx]": { "editor.wordWrap": "on" }
+  },
+  "extensions": {
+    "recommendations": [
+      "unifiedjs.vscode-mdx",
+      "chrischinchilla.vale-vscode",
+      "yzhang.markdown-all-in-one"
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Dev server",
+        "type": "shell",
+        "command": "npm start",
+        "options": { "cwd": "${workspaceFolder:web-site (root)}" },
+        "isBackground": true,
+        "problemMatcher": [],
+        "group": { "kind": "build", "isDefault": true }
+      },
+      {
+        "label": "Production build",
+        "type": "shell",
+        "command": "npm run build",
+        "options": { "cwd": "${workspaceFolder:web-site (root)}" },
+        "problemMatcher": []
+      }
+    ]
+  }
+}
