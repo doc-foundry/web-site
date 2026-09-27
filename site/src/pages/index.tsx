@@ -13,6 +13,9 @@ export default function Home(): ReactNode {
         <Heading as="h1">{siteConfig.title}</Heading>
         <p>{siteConfig.tagline}</p>
         <p>Site under construction.</p>
+        <p>
+          <a href="mailto:contact@doc-foundry.com">contact@doc-foundry.com</a>
+        </p>
       </main>
     </Layout>
   );
