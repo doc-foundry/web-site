@@ -28,9 +28,12 @@ page says "Site under construction". Turn docs and blog on only when there is co
   - `build` job: `npm ci`, typecheck, build (`onBrokenLinks: 'throw'`), then lychee over the
     Markdown and the built HTML.
   - `vale` job: Vale on `*.md` with the Microsoft style and the `DocFoundry` vocabulary.
-- **Cloudflare Workers** deploys from the repo root. The config is in `wrangler.jsonc` (assets from
+- **Cloudflare Workers** (Worker name `web-site`, custom domains `doc-foundry.com` and `www`,
+  zone setting Always Use HTTPS on) deploys from the repo root. The config is in `wrangler.jsonc` (assets from
   `site/build`), and the build command is `npm run build`. Keep `"previews": {}`, or PR preview
   builds fail. The Node version comes from `.node-version`.
+- Builds authenticate with a user API token (My Profile → API Tokens). Deleting a Worker doesn't
+  delete the token; deleting the token breaks builds.
 - The user connects Git in the Cloudflare dashboard and merges PRs. Claude can't see Cloudflare
   build logs, so ask for them.
 
