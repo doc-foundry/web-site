@@ -39,3 +39,6 @@ jobs:
           files: '["README.md", "site", "downloads", "notes"]'
           filter_mode: nofilter
           fail_on_error: true
+          # Any reported finding fails the job, so report warnings and errors only.
+          # Suggestions still show locally (MinAlertLevel in .vale.ini).
+          vale_flags: '--minAlertLevel=warning'

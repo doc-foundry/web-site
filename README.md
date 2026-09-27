@@ -14,7 +14,7 @@ The repository is an npm workspace. Run every command from the root:
 
 ```sh
 npm install
-npm start          # dev server
+npm start          # development server
 npm run build      # production build into site/build
 npm run typecheck
 ```
