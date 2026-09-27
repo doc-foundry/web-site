@@ -20,7 +20,7 @@ single `node_modules/`, at the root.
 ## Status
 
 Phase 1 placeholder: docs and blog are disabled, the navbar and footer have no links, and the home
-page says "Site under construction". Turn docs and blog on only when there is content to link to.
+page says "Site under construction" and shows the contact address, contact@doc-foundry.com. Turn docs and blog on only when there is content to link to.
 
 ## CI and deploy
 
