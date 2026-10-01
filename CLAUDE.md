@@ -19,8 +19,18 @@ single `node_modules/`, at the root.
 
 ## Status
 
-Phase 1 placeholder: docs and blog are disabled, the navbar and footer have no links, and the home
-page says "Site under construction" and shows the contact address, contact@doc-foundry.com. Turn docs and blog on only when there is content to link to.
+The blog is on (`site/blog/`), and the navbar links to it. Docs are still disabled, and the footer has no
+links. The home page still says "Site under construction" and shows the contact address,
+contact@doc-foundry.com. Turn docs on only when there is content to link to.
+
+## Blog
+
+- Posts are `site/blog/YYYY-MM-DD-slug.md`, with `authors: [koray]` and tags from `tags.yml`
+  (inline authors and tags fail the build).
+- **`.md` is parsed as MDX** (the `future.v4` flag), so the excerpt marker is `{/* truncate */}`,
+  not an HTML comment. Every post needs one, or the build fails.
+- Vale runs on posts with `Microsoft.FirstPerson` and `Microsoft.We` off (`[site/blog/*.md]` in
+  `.vale.ini`). CI fails on any warning.
 
 ## CI and deploy
 
