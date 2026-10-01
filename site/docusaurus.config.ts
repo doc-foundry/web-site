@@ -4,8 +4,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-// Phase 1 (placeholder): docs and blog are off and the navbar/footer carry no
-// links. Turn them back on in Phase 3, when there is content to link to.
+// The blog is on; docs are still off. The navbar links only to sections that
+// have content. The footer carries no links yet.
 
 const config: Config = {
   title: 'Doc Foundry',
@@ -31,7 +31,19 @@ const config: Config = {
       'classic',
       {
         docs: false,
-        blog: false,
+        blog: {
+          showReadingTime: true,
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
+          feedOptions: {
+            type: ['rss', 'atom'],
+            xslt: true,
+          },
+          // Every post needs a {/* truncate */} marker for its list excerpt (.md is parsed as MDX).
+          onUntruncatedBlogPosts: 'throw',
+          onInlineAuthors: 'throw',
+          onInlineTags: 'throw',
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -50,7 +62,7 @@ const config: Config = {
         src: 'img/logo.svg',
         srcDark: 'img/logo-dark.svg',
       },
-      items: [],
+      items: [{to: '/blog', label: 'Blog', position: 'left'}],
     },
     footer: {
       style: 'dark',
