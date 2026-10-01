@@ -44,7 +44,12 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Doc Foundry',
+      // The logo is a lockup that already carries the wordmark, so no title.
+      logo: {
+        alt: 'Doc Foundry',
+        src: 'img/logo.svg',
+        srcDark: 'img/logo-dark.svg',
+      },
       items: [],
     },
     footer: {
