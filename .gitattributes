@@ -2,3 +2,6 @@
 *.ico binary
 *.png binary
 *.jpg binary
+
+# Keep the logo generator out of GitHub's language stats (the site is TypeScript).
+brand/** linguist-vendored
