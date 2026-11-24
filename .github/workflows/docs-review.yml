@@ -1,0 +1,41 @@
+name: Docs review
+
+# Advisory style review by Claude on changed Markdown lines. Posts one PR review with inline
+# comments; it never fails the PR and isn't a required check.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths: ['**/*.md', '**/*.mdx']
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: docs-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    # Draft PRs cost nothing until marked ready. Fork PRs get no secrets, so skip them.
+    if: >-
+      !github.event.pull_request.draft &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - run: npm ci --prefix .github/docs-review
+      - run: node .github/docs-review/review.mjs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          # Set only on synchronize: limits the review to what the new push changed.
+          BEFORE_SHA: ${{ github.event.action == 'synchronize' && github.event.before || '' }}

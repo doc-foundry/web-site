@@ -1,0 +1,9 @@
+{
+  "name": "docs-review",
+  "private": true,
+  "type": "module",
+  "description": "Advisory style review of changed Markdown lines, run by .github/workflows/docs-review.yml",
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.133.0"
+  }
+}

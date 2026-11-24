@@ -18,6 +18,16 @@ npm
 callouts?
 conums?
 tooltips?
+Bing
+ffmpeg
+Kokoro
+XTTS
+Shure
+Synthesia
+Descript
+NVMe
+prerender(s|ed|ing)?
+Vercel
 Spolsky
 dotless
 DLLs?
