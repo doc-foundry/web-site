@@ -4,8 +4,9 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-// The blog is on; docs are still off. The navbar links only to sections that
-// have content. The footer carries no links yet.
+// Sections: Solutions (docs plugin, off until its first page), Downloads (custom page, added
+// with the first package), Articles (second blog instance) and Blog. The navbar links only to
+// sections that have content. The footer carries no links yet.
 
 const config: Config = {
   title: 'Doc Foundry',
@@ -31,6 +32,33 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  plugins: [
+    [
+      '@docusaurus/plugin-content-blog',
+      {
+        // Long, evergreen articles. Short posts go to the blog.
+        id: 'articles',
+        path: 'articles',
+        routeBasePath: 'articles',
+        blogTitle: 'Articles',
+        blogDescription: 'Long-form articles on documentation engineering.',
+        // Shared with the blog, so one author and tag list serves both.
+        authorsMapPath: '../blog/authors.yml',
+        tags: '../blog/tags.yml',
+        showReadingTime: true,
+        blogSidebarTitle: 'All articles',
+        blogSidebarCount: 'ALL',
+        feedOptions: {
+          type: ['rss', 'atom'],
+          xslt: true,
+        },
+        onUntruncatedBlogPosts: 'throw',
+        onInlineAuthors: 'throw',
+        onInlineTags: 'throw',
+      },
+    ],
+  ],
 
   presets: [
     [
@@ -69,7 +97,11 @@ const config: Config = {
         src: 'img/logo.svg',
         srcDark: 'img/logo-dark.svg',
       },
-      items: [{to: '/blog', label: 'Blog', position: 'left'}],
+      // Final order: Solutions, Downloads, Articles, Blog.
+      items: [
+        {to: '/articles', label: 'Articles', position: 'left'},
+        {to: '/blog', label: 'Blog', position: 'left'},
+      ],
     },
     footer: {
       style: 'dark',
