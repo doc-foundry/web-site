@@ -27,10 +27,17 @@ contact@doc-foundry.com. Turn docs on only when there is content to link to.
 
 - Posts are `site/blog/YYYY-MM-DD-slug.md`, with `authors: [koray]` and tags from `tags.yml`
   (inline authors and tags fail the build).
-- **`.md` is parsed as MDX** (the `future.v4` flag), so the excerpt marker is `{/* truncate */}`,
-  not an HTML comment. Every post needs one, or the build fails.
-- Vale runs on posts with `Microsoft.FirstPerson` and `Microsoft.We` off (`[site/blog/*.md]` in
-  `.vale.ini`). CI fails on any warning.
+- **`.md` is CommonMark, `.mdx` is MDX** (`markdown.format: 'detect'`). Write posts as `.md`
+  with the excerpt marker `<!-- truncate -->`; use `.mdx` (marker `{/* truncate */}`) only when a
+  post needs JSX or imported components. Every post needs a marker, or the build fails.
+  Admonitions (`:::note`) work in both.
+- **Scheduling:** the blog plugin doesn't hide future-dated posts; a post dated tomorrow is live
+  as soon as it merges. Merge an unpublished post with `draft: true` (excluded from production
+  builds, shown by `npm start`), then remove the flag in a one-line PR on its publication day.
+  Set the filename date to that day too.
+- **Vale blog profile** (`[site/blog/*.{md,mdx}]` in `.vale.ini`): `Microsoft.FirstPerson`, `We`
+  and `QuestionMarks` off, with the reason for each. Change the profile, not individual posts.
+  CI fails on warnings and errors; suggestions (such as Passive) stay advisory.
 
 ## CI and deploy
 

@@ -8,7 +8,7 @@ tags: [writing, localization, docs-as-code]
 
 For two decades I localized other people's software documentation. Translating a sentence means you can't skim past it: every ambiguity in the source becomes a decision, and every target language inherits that decision. The habits I brought back to writing my own docs all do the same thing. They take decisions away from the reader.
 
-{/* truncate */}
+<!-- truncate -->
 
 ## Where translators get stuck
 

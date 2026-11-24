@@ -21,6 +21,12 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
 
+  // .md files are CommonMark, so HTML comments such as <!-- truncate --> work. Use .mdx for any
+  // page that needs JSX or imported components.
+  markdown: {
+    format: 'detect',
+  },
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -39,7 +45,8 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Every post needs a {/* truncate */} marker for its list excerpt (.md is parsed as MDX).
+          // Every post needs a truncate marker for its list excerpt: <!-- truncate --> in .md,
+          // {/* truncate */} in .mdx.
           onUntruncatedBlogPosts: 'throw',
           onInlineAuthors: 'throw',
           onInlineTags: 'throw',
