@@ -16,12 +16,23 @@ resolve an ID when the page renders:
 
 | Runtime component | Build-time plugin | Why it's better |
 |---|---|---|
-| `<Ref id="x">text</Ref>` + JSON map | `[text](xref:x)` rewritten in the mdast; registry entries are `{path, title}`; `[](xref:x)` fills in the title | Source stays plain Markdown. An unknown ID fails the build. Link text can't drift from page titles |
+| `<Xref id="x">text</Xref>` + JSON map | `[text](xref:x)` rewritten in the mdast; registry entries are `{path, title}`; `[](xref:x)` fills in the title | Source stays plain Markdown. An unknown ID fails the build. Link text can't drift from page titles |
 | `<Embed id="x" />` resolved at render | `::include{file=… tag=…}` directive spliced into the AST; AsciiDoc-style `tag::x[]` / `end::x[]` regions | Included headings reach the TOC and search index. A runtime component can't do this |
 | Term/definition pairs laid out in a `<table>` | Glossary component or definition-list syntax → `<dl>` + CSS grid | Semantic HTML, accessible, and it pairs with first-use tooltips |
 
 Open question for each: ship both a remark plugin and a thin React wrapper, or only the plugin?
 Decide per component, and document the trade-offs.
+
+**Decided for `Xref` (2026-10-25): a React component.** Authors write
+`<Xref id="install-cli">Installing the CLI</Xref>`, or `<Xref id="install-cli" />` to use the
+registry title. The registry, `xrefs.json`, maps each ID to `{path, title}`. The runtime cost
+the table above warns about doesn't apply here, because Docusaurus prerenders every page: the link
+is in the static HTML and the search index. Two guards keep IDs honest:
+
+- **Typed IDs.** The `id` prop is typed as a key of `xrefs.json`, so the editor flags a typo.
+- **Build-time check.** A validation plugin scans the MDX for unknown IDs and fails the build,
+  naming the file and the line. The component also throws on an unknown ID, which fails
+  prerendering as a backstop.
 
 ## Markdown gaps: Candidate components and plugins
 
