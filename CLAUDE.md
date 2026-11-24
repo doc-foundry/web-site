@@ -38,6 +38,8 @@ Four sections, in this navbar order. A section joins the navbar only with its fi
 | Articles (`/articles`) | Long, evergreen essays that may grow over time | Second blog instance (`id: 'articles'`, `site/articles/`), sharing `authors.yml` and `tags.yml` with the blog | Live |
 | Blog (`/blog`) | Short, timely posts, about LinkedIn length | Blog in the preset (`site/blog/`) | Live |
 
+- **Every solution is part article, part tutorial:** the problem and its trade-offs first, then a
+  hands-on walkthrough that uses our solution (install, configure, run, see the result).
 - **Pattern solutions** compare one documentation pattern across Docusaurus, Mintlify, Hugo,
   MkDocs and Antora with a matrix (native / plugin / custom / not feasible), plus the trade-offs
   of each route. Each gets an MIT package in `downloads/`, and the two link to each other.
