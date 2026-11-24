@@ -22,15 +22,24 @@ jobs:
       !github.event.pull_request.draft &&
       github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
+    # Without the ANTHROPIC_API_KEY secret the review is skipped (secrets can't appear in `if:`).
+    env:
+      HAS_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
     steps:
-      - uses: actions/checkout@v4
+      - if: env.HAS_KEY != 'true'
+        run: echo "::notice::ANTHROPIC_API_KEY is not set; docs review skipped."
+      - if: env.HAS_KEY == 'true'
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - if: env.HAS_KEY == 'true'
+        uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
       - run: npm ci --prefix .github/docs-review
+        if: env.HAS_KEY == 'true'
       - run: node .github/docs-review/review.mjs
+        if: env.HAS_KEY == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
