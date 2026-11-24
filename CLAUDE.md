@@ -19,8 +19,8 @@ single `node_modules/`, at the root.
 
 ## Status
 
-The blog is live (`site/blog/`, first post merged in #6), and the navbar links to it. Docs are
-still disabled, and the footer has no links. The home page still says "Site under construction"
+The blog (`site/blog/`) and Articles (`site/articles/`) are live, and the navbar links to both.
+Solutions (the docs plugin) is still disabled, and the footer has no links. The home page still says "Site under construction"
 and shows the contact address, contact@doc-foundry.com. Turn docs on only when there is content
 to link to.
 
@@ -29,11 +29,24 @@ to link to.
 Content comes first: articles, tutorials, solutions and downloads. Polish (dates, layout details)
 comes second.
 
-- **Blog posts:** short, practical, first-person.
-- **Pattern articles:** one documentation pattern per post, compared across Docusaurus, Mintlify,
-  Hugo, MkDocs and Antora with a matrix (native / plugin / custom / not feasible), plus the
-  trade-offs of each route. Each pattern gets an MIT package in `downloads/`.
-- **Tutorials and series:** multi-part, built from a worked example.
+Four sections, in this navbar order. A section joins the navbar only with its first item.
+
+| Section | Holds | Mechanism | Status |
+|---|---|---|---|
+| Solutions (`/solutions`) | Evergreen how-tos with a runnable result: pattern solutions (`xref`, `include`, glossary), agent-readable docs (`llms.txt`, `.md` twins), CI checks. Grouped in a sidebar, edited in place. | Docs plugin (`docs:` in the preset, `path: 'solutions'`, `routeBasePath: 'solutions'`) | Off until the first solution |
+| Downloads (`/downloads`) | One entry per package in `downloads/*`: name, one-line description, version, links to its solution and source | Custom page in `site/src/pages/downloads.tsx`, generated from the packages' `package.json` so it can't drift | Added with the first package |
+| Articles (`/articles`) | Long, evergreen essays that may grow over time | Second blog instance (`id: 'articles'`, `site/articles/`), sharing `authors.yml` and `tags.yml` with the blog | Live |
+| Blog (`/blog`) | Short, timely posts, about LinkedIn length | Blog in the preset (`site/blog/`) | Live |
+
+- **Every solution is part article, part tutorial:** the problem and its trade-offs first, then a
+  hands-on walkthrough that uses our solution (install, configure, run, see the result).
+- **Pattern solutions** compare one documentation pattern across Docusaurus, Mintlify, Hugo,
+  MkDocs and Antora with a matrix (native / plugin / custom / not feasible), plus the trade-offs
+  of each route. Each gets an MIT package in `downloads/`, and the two link to each other.
+- **Articles:** same conventions as blog posts (excerpt marker, shared tags). When an article is
+  extended, add `last_update: {date: YYYY-MM-DD}` to its front matter and turn on
+  `showLastUpdateTime` for the instance. It isn't on yet, because without front matter it shows
+  the last commit date, so a typo fix would read as an update.
 
 Editorial rules:
 - Every solution has trade-offs. Cover them in admonitions and let the reader decide; no
