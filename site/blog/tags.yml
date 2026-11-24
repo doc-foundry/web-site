@@ -1,0 +1,11 @@
+writing:
+  label: Writing
+  description: Writing craft for technical documentation.
+
+localization:
+  label: Localization
+  description: Writing source content that survives translation.
+
+docs-as-code:
+  label: Docs as code
+  description: Treating documentation like software, with versioning, review, and CI.
