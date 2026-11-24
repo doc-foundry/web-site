@@ -18,3 +18,6 @@ npm-debug.log*
 # Vale packages (downloaded by `vale sync`); keep our own vocabulary
 styles/*
 !styles/config/
+
+# Private session context (imports a file outside the repo)
+CLAUDE.local.md

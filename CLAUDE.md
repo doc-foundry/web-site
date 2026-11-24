@@ -19,9 +19,30 @@ single `node_modules/`, at the root.
 
 ## Status
 
-The blog is on (`site/blog/`), and the navbar links to it. Docs are still disabled, and the footer has no
-links. The home page still says "Site under construction" and shows the contact address,
-contact@doc-foundry.com. Turn docs on only when there is content to link to.
+The blog is live (`site/blog/`, first post merged in #6), and the navbar links to it. Docs are
+still disabled, and the footer has no links. The home page still says "Site under construction"
+and shows the contact address, contact@doc-foundry.com. Turn docs on only when there is content
+to link to.
+
+## Content program
+
+Content comes first: articles, tutorials, solutions and downloads. Polish (dates, layout details)
+comes second.
+
+- **Blog posts:** short, practical, first-person.
+- **Pattern articles:** one documentation pattern per post, compared across Docusaurus, Mintlify,
+  Hugo, MkDocs and Antora with a matrix (native / plugin / custom / not feasible), plus the
+  trade-offs of each route. Each pattern gets an MIT package in `downloads/`.
+- **Tutorials and series:** multi-part, built from a worked example.
+
+Editorial rules:
+- Every solution has trade-offs. Cover them in admonitions and let the reader decide; no
+  single-verdict posts.
+- Every post ships with a runnable artifact: a package, a CI rule, or lab code.
+- Describe patterns and generic failure modes only; name no client or employer.
+
+The private plan (backlog, sources, idea queue) lives outside the repo and is loaded through the
+gitignored `CLAUDE.local.md`.
 
 ## Blog
 
